@@ -15,11 +15,6 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-if not os.path.exists("/opt/render/.cache/ms-playwright/chromium"):
-    logger.info("Installing Playwright browsers...")
-    os.system("playwright install chromium")
-    os.system("playwright install-deps")
-    
 app = Flask(__name__)
 
 # Cache configuration
