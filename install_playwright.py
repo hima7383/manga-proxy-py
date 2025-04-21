@@ -1,8 +1,11 @@
-from playwright.__main__ import main as playwright_install
 import os
+from playwright import async_playwright
+
+async def install_browsers():
+    async with async_playwright() as p:
+        await p.chromium.download()
 
 if __name__ == "__main__":
-    # Force install in user-writable location
     os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
-    playwright_install(["install", "chromium"])
-    playwright_install(["install-deps"])
+    import asyncio
+    asyncio.get_event_loop().run_until_complete(install_browsers())
