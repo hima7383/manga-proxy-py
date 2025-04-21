@@ -4,9 +4,10 @@ services:
     env: python
     buildCommand: |
       pip install -r requirements.txt
-      playwright install firefox
+      playwright install --force firefox
+      python -c "from playwright.sync_api import sync_playwright; sync_playwright().start().firefox.launch(headless=True).close()"
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.16
-    plan: starter  # Minimum required for Playwright
+    plan: starter  # Minimum required plan
