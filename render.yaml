@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: manga-proxy
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      playwright install firefox
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+    plan: starter  # Minimum required for Playwright
